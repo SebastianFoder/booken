@@ -8,7 +8,7 @@ import { TagSchema } from "@/app/api/tags/tag-schema";
 import ReadButton from "./reader";
 
 async function getOrd(id: number): Promise<IOrdFinal> {
-    const res = await axios.get(`http://localhost:3000/api/ord/${id}`, {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/ord/${id}`, {
         params: {
             _: new Date().getTime() // Cache busting
         }

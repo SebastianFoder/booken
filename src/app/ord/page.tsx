@@ -8,7 +8,7 @@ async function getOrd({ page = 1, limit = 50, ord = '', tags = [] }: { page?: nu
     totalPages: number;
     totalCount: number;
 }> {
-    const res = await axios.get(`http://localhost:3000/api/ord`, {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/ord`, {
         params: {
             page,
             limit,
@@ -24,7 +24,7 @@ async function getOrd({ page = 1, limit = 50, ord = '', tags = [] }: { page?: nu
 async function getTags(): Promise<{
     tags: TagSchema[]
 }>{
-    const res = await axios.get(`http://localhost:3000/api/tags`, {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/tags`, {
         params: {
             _: new Date().getTime() // Cache busting
         }

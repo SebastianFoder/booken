@@ -58,7 +58,7 @@ DB_END_POINT=your-mongodb-api-endppoint
 DB_API_KEY=your-mongodb-api-key
 DB_NAME=your-mongodb-database-name
 DB_SOURCE=your-mongodb-datasource
-URL=your-url(normaly http://localhost:3000)
+NEXT_PUBLIC_URL=your-url(normaly http://localhost:3000)
 ```
 
 4. Run the development server:

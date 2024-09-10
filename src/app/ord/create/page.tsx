@@ -12,7 +12,7 @@ export async function submitOrd(finalOrd: IOrdFinal): Promise<boolean> {
             tags: finalOrd.tags.map(tag => new ObjectId(tag._id)),
         };
 
-        const response = await axios.post(`http://localhost:3000/api/ord`, ordData, {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/ord`, ordData, {
             headers: {
                 'Content-Type': 'application/json',
             },

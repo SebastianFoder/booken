@@ -24,9 +24,9 @@ router: AppRouterInstance
         return false;
     } else{
         if(await submit(tag)){
-            mutate(`http://localhost:3000/api/tags`);
+            mutate(`${process.env.NEXT_PUBLIC_URL}/api/tags`);
             if(tag._id.length > 0){
-                mutate(`http://localhost:3000/api/tags/${tag._id}`);
+                mutate(`${process.env.NEXT_PUBLIC_URL}/api/tags/${tag._id}`);
             }           
             router.push('/tags');
             setDisabled(false);

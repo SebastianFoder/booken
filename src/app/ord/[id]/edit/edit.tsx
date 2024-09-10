@@ -15,7 +15,7 @@ const handleSubmit = async (finalOrd: IOrdFinal) => {
             definition: finalOrd.definition,
             tags: finalOrd.tags.map(tag => tag._id),
         }
-        const response = await axios.patch(`http://localhost:3000/api/ord/${finalOrd._id}`, patchData, {
+        const response = await axios.patch(`${process.env.NEXT_PUBLIC_URL}/api/ord/${finalOrd._id}`, patchData, {
             headers: {
                 'Content-Type': 'application/json',
             },

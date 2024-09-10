@@ -48,7 +48,7 @@ export default function OrdTable({ page, limit, ordSearch: initialOrdSearch, sel
         ord: IOrdFinal[];
         totalPages: number;
         totalCount: number;
-    }>(`http://localhost:3000/api/ord?page=${page}&limit=${limit}&ord=${ordSearchOG}&tags=${selectedTagsOG.join(',')}`, fetcher, {
+    }>(`${process.env.NEXT_PUBLIC_URL}/api/ord?page=${page}&limit=${limit}&ord=${ordSearchOG}&tags=${selectedTagsOG.join(',')}`, fetcher, {
         fallbackData: fallback,
         refreshInterval: 0,
         revalidateOnMount: true,
@@ -64,7 +64,7 @@ export default function OrdTable({ page, limit, ordSearch: initialOrdSearch, sel
     // Handle the delete operation
     const handleDeleteConfirm = async (ordId?: string) => {
         try {
-            const response = await axios.delete(`http://localhost:3000/api/ord/${ordId || ordToDelete}`);
+            const response = await axios.delete(`${process.env.NEXT_PUBLIC_URL}/api/ord/${ordId || ordToDelete}`);
             if (response.status !== 200 && response.status !== 201) throw new Error('Failed to delete');
             mutate();            
             if(showModal) setShowModal(false);

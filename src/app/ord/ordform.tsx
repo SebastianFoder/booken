@@ -18,9 +18,9 @@ async function handleSubmit(finalOrd: IOrdFinal, submit: (ord: IOrdFinal) => Pro
         return false;
     }
     if (await submit(finalOrd)) {
-        mutate(`http://localhost:3000/api/ord`);
+        mutate(`${process.env.NEXT_PUBLIC_URL}/api/ord`);
         if (finalOrd._id.length > 0) {
-            mutate(`http://localhost:3000/api/ord/${finalOrd._id}`);
+            mutate(`${process.env.NEXT_PUBLIC_URL}/api/ord/${finalOrd._id}`);
         }
         const referrer = document.referrer;
         const isFromOrd = referrer.includes('/ord');
@@ -52,7 +52,7 @@ export default function OrdForm({ initialOrd, submit }: OrdFormProps) {
     // Use SWR to fetch tags
     const { data: tagsData, error, isLoading } = useSWR<{
         tags: TagSchema[]
-    }>(`http://localhost:3000/api/tags`, fetcher, {
+    }>(`${process.env.NEXT_PUBLIC_URL}/api/tags`, fetcher, {
         revalidateOnFocus: false,
         revalidateOnMount: true,
         refreshWhenHidden: false,
