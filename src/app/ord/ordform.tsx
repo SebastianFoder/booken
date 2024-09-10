@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect, MouseEventHandler } from "react";
-import ReactQuill from "react-quill";
+import { useState, useEffect, MouseEventHandler, use } from "react";
 import 'react-quill/dist/quill.snow.css';
 import Select from 'react-select';
 import axios from 'axios';
@@ -12,6 +11,10 @@ import { TagSchema } from "../api/tags/tag-schema";
 import { IOrdFinal } from "../api/ord/ord-schema";
 import { useRouter } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
 
 async function handleSubmit(finalOrd: IOrdFinal, submit: (ord: IOrdFinal) => Promise<boolean>, router: AppRouterInstance){
     if (!finalOrd.ord || !finalOrd.definition || finalOrd.tags.length === 0) {
@@ -110,10 +113,10 @@ export default function OrdForm({ initialOrd, submit }: OrdFormProps) {
                 <div className="form-group">
                     <label htmlFor="definition">Definition</label>
                     <ReactQuill
-                        value={definition}
-                        onChange={setDefinition}
-                        theme="snow"
-                    />
+                            value={definition}
+                            onChange={setDefinition}
+                            theme="snow"
+                        />                  
                 </div>
                 <div className="form-group">
                     <label htmlFor="tags">Tags</label>

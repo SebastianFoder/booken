@@ -3,7 +3,7 @@ import { IOrdFinal } from "../api/ord/ord-schema";
 import axios from "axios";
 
 export async function submitOrd(finalOrd: IOrdFinal): Promise<boolean> {
-    'use server';
+    "use server";
     try {
         // Map the tags to only include their IDs
         const ordData = {
