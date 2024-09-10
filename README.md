@@ -67,7 +67,6 @@ URL=your-url(normaly http://localhost:3000)
 npm run dev
 ```
 
-<<<<<<< HEAD
 5. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## **Usage**
