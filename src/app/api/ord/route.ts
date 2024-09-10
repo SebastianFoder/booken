@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import { IOrd, IOrdFinal, OrdSchema } from "./ord-schema";
-import { ObjectId } from "mongodb";
 
 // Base configuration
 const config = {
