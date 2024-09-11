@@ -1,5 +1,15 @@
 import { Suspense } from "react";
 import TagsTable from "./tagsTable";
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Booken | Tags',
+    description: 'See all tags in the dictionary',
+    openGraph: {
+        title: 'Booken | Tags',
+        description: 'See all tags in the dictionary',
+    },
+};
 
 export default async function TagsPage() {
     return (

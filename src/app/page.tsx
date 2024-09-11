@@ -1,4 +1,14 @@
 import Link from "next/link";
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Booken | Home Page',
+  description: 'A Neurodivergent Dictionary for Knowledge Discovery',
+  openGraph: {
+    title: 'Booken | Home Page',
+    description: 'A Neurodivergent Dictionary for Knowledge Discovery',
+  },
+};
 
 export default function Home() {
     return (

@@ -6,13 +6,31 @@ import Tag from "@/app/tags/tag";
 import * as chroma from "chroma.ts";
 import { TagSchema } from "@/app/api/tags/tag-schema";
 import ReadButton from "./reader";
+import type { Metadata } from 'next';
+
+// Create a dynamic metadata function
+export async function generateMetadata({ params }: { params: { id: number } }): Promise<Metadata> {
+    const ord = await getOrd(params.id);
+    const sanitizedHTML = DOMPurify.sanitize(ord.definition);
+    const plainText = sanitizedHTML
+        .replace(/<[^\/][^>]*>/g, '')
+        .replace(/<\/[^>]+>/g, '. ');
+
+
+    // You can dynamically set the metadata based on the fetched data
+    return {
+        title: `Booken | ${ord.ord}`,
+        description: plainText.substring(0, 150), // Shorten the definition for description
+        openGraph: {
+            title: `Booken | ${ord.ord}`,
+            description: plainText.substring(0, 150),
+        },
+    };
+}
+
 
 async function getOrd(id: number): Promise<IOrdFinal> {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/ord/${id}`, {
-        params: {
-            _: new Date().getTime() // Cache busting
-        }
-    });
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/ord/${id}`);
 
     return res.data;
 }
@@ -24,7 +42,6 @@ export default async function OrdetPage({ params } : { params: { id: number } })
     const plainText = sanitizedHTML
         .replace(/<[^\/][^>]*>/g, '')    // Remove start tags
         .replace(/<\/[^>]+>/g, '. ');   // Replace closing tags with ". "
-    console.log(plainText);
     return(
         <main>
             <section className="ord-show">

@@ -9,6 +9,7 @@ import { TagSchema } from '../api/tags/tag-schema';
 import { mutate } from 'swr';
 import { useRouter } from 'next/navigation';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import type { Metadata } from 'next';
 
 interface ITagFormProps{
     tag?: TagSchema;

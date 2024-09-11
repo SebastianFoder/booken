@@ -1,6 +1,16 @@
 import axios from 'axios';
 import { TagSchema } from '@/app/api/tags/tag-schema';
 import TagForm from '../tagForm';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Booken | Create Tag',
+    description: 'Create a new tag in the dictionary',
+    openGraph: {
+        title: 'Booken | Create Tag',
+        description: 'Create a new tag in the dictionary',
+    },
+};
 
 async function AddTag(tag: TagSchema) : Promise<boolean>{
     'use server';

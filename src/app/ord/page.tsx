@@ -2,6 +2,16 @@ import OrdTable from './ordtable';
 import axios from 'axios';
 import { IOrdFinal } from '../api/ord/ord-schema';
 import { TagSchema } from '../api/tags/tag-schema';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Booken | Ord',
+    description: 'See all the ord in the dictionary',
+    openGraph: {
+        title: 'Booken | Ord',
+        description: 'See all the ord in the dictionary',
+    },
+};
 
 async function getOrd({ page = 1, limit = 50, ord = '', tags = [] }: { page?: number, limit?: number, ord?: string, tags?: string[] } = {}): Promise<{
     ord: IOrdFinal[];

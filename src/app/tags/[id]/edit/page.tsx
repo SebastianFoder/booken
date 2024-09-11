@@ -1,5 +1,16 @@
 import { Suspense } from "react";
 import EditTag from "./edit";
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Booken | Edit Tag',
+    description: 'Edit a tag in the dictionary',
+    openGraph: {
+        title: 'Booken | Edit Tag',
+        description: 'Edit a tag in the dictionary',
+    },
+};
+
 
 export default function EditTagPage({ params }: { params: { id: string}}){
     return(
