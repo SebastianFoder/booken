@@ -4,6 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { mutate } from 'swr';
 
 async function login(username: string, password: string, router: AppRouterInstance) {
     try {
@@ -14,7 +15,8 @@ async function login(username: string, password: string, router: AppRouterInstan
 
         const { token } = response.data;
         localStorage.setItem('token', token);
-        
+        mutate(`${process.env.NEXT_PUBLIC_URL}/api/user`);
+
         const referrer = document.referrer;
         const isFromOrd = referrer.includes(process.env.NEXT_PUBLIC_URL || '');
 

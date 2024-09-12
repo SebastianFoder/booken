@@ -40,9 +40,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<{ success: bo
 
         // Fetch user from the database
         const requestData = createRequestData({
-            filter: {
-                _id: decodedToken._id,
-            },
+            filter: { _id: { $oid: decodedToken._id } }
         });
 
         const response = await axios.post(`${config.endPoint}/action/findOne`, requestData, {
@@ -53,7 +51,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<{ success: bo
             },
         });
 
-        const data = response.data;
+        const data = response.data.document;
 
         if (!data) {
             return NextResponse.json({ error: 'User not found', success: false }, { status: 404 });

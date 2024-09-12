@@ -4,6 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { mutate } from 'swr';
 
 async function signup(username: string, password: string, router: AppRouterInstance) {
     try {
@@ -16,6 +17,8 @@ async function signup(username: string, password: string, router: AppRouterInsta
 
         // Save the JWT token in localStorage (or handle it as needed)
         localStorage.setItem('token', token);
+
+        mutate(`${process.env.NEXT_PUBLIC_URL}/api/user`);
 
         const referrer = document.referrer;
         const isFromOrd = referrer.includes(process.env.NEXT_PUBLIC_URL || '');

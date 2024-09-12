@@ -99,7 +99,6 @@ export async function POST(req: NextRequest): Promise<NextResponse<{ success: bo
                 authLevel: newUser.authLevel,
             },
             AUTH_SECRET, // Secret key
-            { expiresIn: '7d' } // Token valid for 7 days
         );
 
         // Return the inserted document ID and the token
