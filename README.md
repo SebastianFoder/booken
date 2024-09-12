@@ -59,6 +59,7 @@ DB_API_KEY=your-mongodb-api-key
 DB_NAME=your-mongodb-database-name
 DB_SOURCE=your-mongodb-datasource
 NEXT_PUBLIC_URL=your-url(normaly http://localhost:3000)
+AUTH_SECRET=your-own-generated-secret-key
 ```
 
 4. Run the development server:
@@ -101,7 +102,6 @@ For better accessibility, users can click the "Read Definition" button to have t
 
 ## **Future Plans**
 
-- **User Accounts**: Personalized tagging system based on individual preferences.
 - **Improved TTS**: Support for voice selection and speed adjustment.
 - **Tag Suggestions**: Autocomplete and suggest related tags when tagging Ords.
 

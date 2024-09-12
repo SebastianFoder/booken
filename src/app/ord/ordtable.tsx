@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { TagSchema } from "../api/tags/tag-schema";
 import Select from "react-select";
+import AuthGateway from "../lib/authGateway";
 
 const fetcher = (url: string) => axios.get(url).then(res => res.data);
 
@@ -168,11 +169,13 @@ export default function OrdTable({ page, limit, ordSearch: initialOrdSearch, sel
                     <tr>
                         <th>Ord</th>
                         <th>Tags</th>
-                        <th>
-                            <Link href="/ord/create">
-                                <FontAwesomeIcon icon={faPlus} /> Opret
-                            </Link>
-                        </th>
+                        <AuthGateway authLevel={1}>
+                            <th>
+                                <Link href="/ord/create">
+                                    <FontAwesomeIcon icon={faPlus} /> Opret
+                                </Link>
+                            </th>
+                        </AuthGateway>
                     </tr>
                 </thead>
                 <tbody>
@@ -194,16 +197,19 @@ export default function OrdTable({ page, limit, ordSearch: initialOrdSearch, sel
                                     />
                                 ))}
                             </td>
-                            <td>
-                                <div className="tag-operations">
-                                    <Link href={`/ord/${ord._id}/edit`}>
-                                        <FontAwesomeIcon icon={faPenToSquare} />
-                                    </Link>
-                                    <button onClick={() => confirmDelete(ord._id)}>
-                                        <FontAwesomeIcon icon={faTrashCan} />
-                                    </button>
-                                </div>
-                            </td>
+                            <AuthGateway authLevel={1}>
+                                <td>
+                                    <div className="tag-operations">
+                                        <Link href={`/ord/${ord._id}/edit`}>
+                                            <FontAwesomeIcon icon={faPenToSquare} />
+                                        </Link>
+                                        <button onClick={() => confirmDelete(ord._id)}>
+                                            <FontAwesomeIcon icon={faTrashCan} />
+                                        </button>
+                                    </div>
+                                </td>
+                            </AuthGateway>
+                            
                         </tr>
                     ))}
                 </tbody>

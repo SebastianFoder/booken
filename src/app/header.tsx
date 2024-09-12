@@ -26,6 +26,11 @@ export default function Header() {
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <NavLink href="/auth/login">
+                            Log In
+                        </NavLink>
+                    </li>
                 </ul>
             </nav>
         </header>

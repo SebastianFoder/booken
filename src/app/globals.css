@@ -322,15 +322,6 @@ form .btn{
   height: 2.5rem;
 }
 
-form .form-group input[type="text"]{
-  font-family: 'Poppins', sans-serif;
-  width: 20ch;
-  border-radius: 1ch;
-  border: 2px solid hsl(var(--black));
-  padding-inline: 0.5rem;
-  height: 1.5rem;
-}
-
 form .form-group input[type="color"]{
   position: relative;
   height: 100%;
@@ -538,12 +529,13 @@ form.ord-form .container{
   gap: 1rem;
 }
 
-form.ord-form input[type="text"]{
+form.ord-form input[type="text"], form.ord-form input[type="password"], form.ord-form textarea{
   width: min(50ch, 100%);
   border: 1px solid hsl(var(--white));
 }
 
-input[type="text"]{
+input[type="text"], input[type="password"]{
+  font-family: 'Poppins', sans-serif;
   padding-inline: 0.5rem;
   background-color: transparent;
   color: hsl(var(--white));
@@ -553,14 +545,27 @@ input[type="text"]{
   font-size: 1.25rem;
 }
 
-input[type="text"]::placeholder, input[type="text"]::-webkit-input-placeholder{
+input[type="text"]::placeholder, input[type="text"]::-webkit-input-placeholder, input[type="password"]::placeholder, input[type="password"]::-webkit-input-placeholder{
   color: hsl(var(--white));
   opacity: 1;
 }
 
-table.ord-table tr {
-  grid-template-columns: 1fr 15rem 1fr;
+table.ord-table tr{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
 }
+table.ord-table tr>*{
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: initial;
+}
+
+table.ord-table tr>*:nth-of-type(2){
+  width: 15rem;
+}
+
 
 table.ord-table td{
   align-items: start;
@@ -641,5 +646,11 @@ div.ord-tags{
   top: 1rem;
   right: 1.5rem;
   display: flex;
+  gap: 1rem;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
