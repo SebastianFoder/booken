@@ -1,3 +1,4 @@
+import AuthPageGateway from "@/app/lib/authPageGateway";
 import OrdForm from "../ordform";
 import { submitOrd } from "../submit-ord";
 import type { Metadata } from 'next';
@@ -13,15 +14,17 @@ export const metadata: Metadata = {
 
 export default function CreateOrd(){
     return(
-        <main>
-            <section>
-                <article>
-                    <h1>Opret Ord</h1>
-                </article>
-                <article>
-                    <OrdForm submit={submitOrd} />
-                </article>
-            </section>
-        </main>
+        <AuthPageGateway authLevel={1}>
+            <main>
+                <section>
+                    <article>
+                        <h1>Opret Ord</h1>
+                    </article>
+                    <article>
+                        <OrdForm submit={submitOrd} />
+                    </article>
+                </section>
+            </main>
+        </AuthPageGateway>
     )
 }

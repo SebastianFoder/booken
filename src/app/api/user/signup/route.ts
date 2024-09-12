@@ -54,6 +54,10 @@ export async function POST(req: NextRequest): Promise<NextResponse<{ success: bo
             return NextResponse.json({ error: 'Username and password are required', success: false }, { status: 400 });
         }
 
+        if (username.length < 4) {
+            return NextResponse.json({ error: 'Username must be at least 4 characters long', success: false }, { status: 400 });
+        }
+
         // Check if the username already exists
         const exists = await userExists(username);
         if (exists) {

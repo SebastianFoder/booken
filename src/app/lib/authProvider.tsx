@@ -47,7 +47,6 @@ export default function AuthProvider({children}: AuthProviderProps) {
         revalidateOnReconnect: false,
         revalidateOnMount: true,     
         onSuccess: (data) => {
-            console.log('User info fetched:', data);
             setAuthState({
                 userAuthLevel: data.authLevel,
                 username: data.username,
@@ -55,7 +54,6 @@ export default function AuthProvider({children}: AuthProviderProps) {
             });
         },
         onError: (err) => {
-            console.log('Error fetching user info:', err);
             setAuthState({
                 userAuthLevel: 0,
                 username: '',

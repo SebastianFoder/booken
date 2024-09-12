@@ -9,6 +9,7 @@ import { faPlus, faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-i
 import * as chroma from "chroma.ts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from 'react';
+import AuthGateway from '../lib/authGateway';
 
 const fetcher = (url: string) => axios.get(url).then(res => res.data);
 
@@ -82,16 +83,18 @@ export default function TagsTable() {
 
     return (
         <>
-            <table border={1} rules="rows">
+            <table className='tag-table' border={1} rules="rows">
                 <thead>
                     <tr>
                         <th>Tag</th>
                         <th>Farve</th>
-                        <th>
-                            <Link href="/tags/create">
-                                <FontAwesomeIcon icon={faPlus} /> Opret
-                            </Link>
-                        </th>
+                        <AuthGateway authLevel={1}>
+                            <th>
+                                <Link href="/tags/create">
+                                    <FontAwesomeIcon icon={faPlus} /> Opret
+                                </Link>
+                            </th>
+                        </AuthGateway>
                     </tr>
                 </thead>
                 <tbody>
@@ -102,16 +105,18 @@ export default function TagsTable() {
                                 <td>
                                     <Tag tag="" primary_color={chroma.color(tag.primary_color)} secondary_color={chroma.color(tag.secondary_color)} />
                                 </td>
-                                <td>
-                                    <div className="tag-operations">
-                                        <Link href={`/tags/${tag._id}/edit`}>
-                                            <FontAwesomeIcon icon={faPenToSquare} />
-                                        </Link>
-                                        <button onClick={() => confirmDelete(tag._id)}>
-                                            <FontAwesomeIcon icon={faTrashCan} />
-                                        </button>
-                                    </div>
-                                </td>
+                                <AuthGateway authLevel={1}>
+                                    <td>
+                                        <div className="tag-operations">
+                                            <Link href={`/tags/${tag._id}/edit`}>
+                                                <FontAwesomeIcon icon={faPenToSquare} />
+                                            </Link>
+                                            <button onClick={() => confirmDelete(tag._id)}>
+                                                <FontAwesomeIcon icon={faTrashCan} />
+                                            </button>
+                                        </div>
+                                    </td>
+                                </AuthGateway>
                             </tr>
                         ))
                     ) : (

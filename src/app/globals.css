@@ -97,7 +97,16 @@ ul.pages a{
   font-weight: 500;
 }
 
-ul.pages a>*{
+nav li.user>h3{
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: hsl(var(--secondary));
+  font-weight: 500;
+}
+
+ul.pages a>*, nav li.user>h3{
   transform: scale(1);
   transition: transform 0.25s cubic-bezier(.85,.75,.21,2.5);
 }
@@ -106,8 +115,15 @@ ul.pages a.active>*{
   transform: scale(1.05);
 }
 
-ul.pages a:hover>*{
+ul.pages a:hover>*, nav li.user:hover>h3{
   transform: scale(1.1);
+}
+
+nav li.user{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 1.5rem;
 }
 
 main{
@@ -220,7 +236,6 @@ table tbody{
 table thead th{
   font-size: 1.375rem;
   font-weight: 600;
-  padding-inline: 1rem;
   color: hsl(var(--white));
 }
 
@@ -550,20 +565,40 @@ input[type="text"]::placeholder, input[type="text"]::-webkit-input-placeholder, 
   opacity: 1;
 }
 
-table.ord-table tr{
+table tr{
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
 }
-table.ord-table tr>*{
+
+
+table tr>*{
   flex-grow: 1;
   flex-shrink: 1;
   width: initial;
 }
 
 table.ord-table tr>*:nth-of-type(2){
-  width: 15rem;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 20rem;
+}
+
+table tr>*:nth-of-type(3){
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 10rem;
+}
+
+table tr>*:nth-of-type(2){
+  width: 10rem;
+  flex-grow: 0;
+}
+
+.tag-table tr>*:nth-of-type(1){
+  flex-shrink: 0;
+  padding-right: 1.5rem;
 }
 
 

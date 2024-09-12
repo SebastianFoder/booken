@@ -1,4 +1,5 @@
 import NavLink from "@/components/navlink";
+import HeaderUser from "./lib/headerUser";
 
 export default function Header() {
     return (
@@ -26,10 +27,8 @@ export default function Header() {
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <NavLink href="/auth/login">
-                            Log In
-                        </NavLink>
+                    <li className="user">
+                        <HeaderUser />
                     </li>
                 </ul>
             </nav>

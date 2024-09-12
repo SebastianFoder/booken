@@ -2,6 +2,7 @@ import axios from 'axios';
 import { TagSchema } from '@/app/api/tags/tag-schema';
 import TagForm from '../tagForm';
 import type { Metadata } from 'next';
+import AuthPageGateway from '@/app/lib/authPageGateway';
 
 export const metadata: Metadata = {
     title: 'Booken | Create Tag',
@@ -23,13 +24,15 @@ async function AddTag(tag: TagSchema) : Promise<boolean>{
 
 export default function CreateTag(){ 
     return(
-        <main>
-            <section>
-                <article>
-                    <h1>Opret Tag</h1>
-                    <TagForm submit={AddTag}/>
-                </article>
-            </section>
-        </main>        
+        <AuthPageGateway authLevel={1}>
+            <main>
+                <section>
+                    <article>
+                        <h1>Opret Tag</h1>
+                        <TagForm submit={AddTag}/>
+                    </article>
+                </section>
+            </main>     
+        </AuthPageGateway>   
     )
 }
