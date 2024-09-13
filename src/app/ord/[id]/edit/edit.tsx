@@ -10,16 +10,22 @@ const fetcher = (url: string) => axios.get(url).then(res => res.data);
 
 const handleSubmit = async (finalOrd: IOrdFinal) => {
     try {
+        const token = localStorage.getItem('token');
+        if (!token) throw new Error('No auth token found');
+
         const patchData = {
             ord: finalOrd.ord,
             definition: finalOrd.definition,
             tags: finalOrd.tags.map(tag => tag._id),
         }
+
         const response = await axios.patch(`${process.env.NEXT_PUBLIC_URL}/api/ord/${finalOrd._id}`, patchData, {
             headers: {
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
         });
+        
         return response.status === 200 || response.status === 201;
     } catch (error) {
         return false;

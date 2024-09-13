@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext} from "react";
+import { useContext, useEffect} from "react";
 import { AuthContext } from "./authProvider";
 import { useRouter } from "next/navigation";
 
@@ -10,11 +10,17 @@ interface AuthPageGatewayProps {
 }
 
 export default function AuthPageGateway({ authLevel, children}: AuthPageGatewayProps) {
-    const { userAuthLevel } = useContext(AuthContext);
+    const { userAuthLevel, isLoading } = useContext(AuthContext);
     const router = useRouter();
 
-    if(userAuthLevel < authLevel){
-        router.push('/auth/login');
-    }
+    useEffect(() => {
+        if(!isLoading){
+            if(userAuthLevel < authLevel){
+                router.push('/auth/login');
+            }
+        }
+        
+    }, [userAuthLevel, isLoading]);
+
     return children;
 }

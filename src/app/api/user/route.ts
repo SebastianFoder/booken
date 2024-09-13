@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
+import HasAuth from '@/app/lib/hasAuth';
 
 // Base configuration for MongoDB API
 const config = {
@@ -12,7 +13,7 @@ const config = {
 };
 
 // JWT Secret from environment variables
-const AUTH_SECRET = process.env.AUTH_SECRET || 'your-default-secret';
+const AUTH_SECRET = process.env.AUTH_SECRET || 'dillermand';
 
 // Helper function to create request structure for MongoDB
 const createRequestData = (requestData?: any) => {
@@ -27,20 +28,14 @@ const createRequestData = (requestData?: any) => {
 // POST request handler for fetching user information
 export async function POST(req: NextRequest): Promise<NextResponse<{ success: boolean, username?: string, authLevel?: number, error?: string }>> {
     try {
-        // Extract token from the request headers
-        const authHeader = req.headers.get('Authorization');
-        if (!authHeader || !authHeader.startsWith('Bearer ')) {
-            return NextResponse.json({ error: 'Authorization header missing or invalid', success: false }, { status: 401 });
+        const auth = HasAuth(req, 0);
+        if(!auth.hasAuth){
+            return NextResponse.json({ error: 'Unauthorized', success: false }, { status: 401 });
         }
-
-        const token = authHeader.replace('Bearer ', '');
-
-        // Verify the JWT token
-        const decodedToken: any = jwt.verify(token, AUTH_SECRET);
 
         // Fetch user from the database
         const requestData = createRequestData({
-            filter: { _id: { $oid: decodedToken._id } }
+            filter: { _id: { $oid: auth.decodedToken._id } }
         });
 
         const response = await axios.post(`${config.endPoint}/action/findOne`, requestData, {

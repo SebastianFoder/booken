@@ -8,6 +8,7 @@ interface AuthContextProps {
     userAuthLevel: number;
     username: string;
     error: string | null;
+    isLoading: boolean;
 }
 
 interface AuthProviderProps {
@@ -32,17 +33,19 @@ const fetcher = (url: string) => {
 export const AuthContext = createContext<AuthContextProps>({
     userAuthLevel: 0,
     username: '',
-    error: null
+    error: null,
+    isLoading: true
 });
 export default function AuthProvider({children}: AuthProviderProps) {
 
     const [authState, setAuthState] = useState<AuthContextProps>({
         userAuthLevel: 0,
         username: '',
-        error: null
+        error: null,
+        isLoading: true
     });
 
-    const {data, error} = useSWR(API_URL, fetcher, { 
+    const {} = useSWR(API_URL, fetcher, { 
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
         revalidateOnMount: true,     
@@ -50,14 +53,16 @@ export default function AuthProvider({children}: AuthProviderProps) {
             setAuthState({
                 userAuthLevel: data.authLevel,
                 username: data.username,
-                error: null
+                error: null,
+                isLoading: false
             });
         },
         onError: (err) => {
             setAuthState({
                 userAuthLevel: 0,
                 username: '',
-                error: err.message || 'Error fetching user info'
+                error: err.message || 'Error fetching user info',
+                isLoading: false
             });
         }   
     });

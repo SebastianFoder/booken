@@ -1,6 +1,7 @@
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import { ITag, TagSchema } from "./tag-schema";
+import HasAuth from "@/app/lib/hasAuth";
 
 // Base configuration
 const config = {
@@ -103,6 +104,11 @@ export async function GET(req: NextRequest): Promise<NextResponse<{ tags: TagSch
 // POST (create) a new Tag
 export async function POST(req: NextRequest): Promise<NextResponse<{ success: boolean, insertedId?: string, error?: string }>> {
   try {
+      const auth = HasAuth(req, 1);
+      if (!auth.hasAuth) {
+          return NextResponse.json({ error: "Unauthorized", success: false }, { status: 401 });
+      }
+      
       // Extract data from the request body
       const body: ITag = await req.json();
 

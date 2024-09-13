@@ -4,7 +4,6 @@ import 'react-quill/dist/quill.snow.css';
 import DOMPurify from "isomorphic-dompurify";
 import Tag from "@/app/tags/tag";
 import * as chroma from "chroma.ts";
-import { TagSchema } from "@/app/api/tags/tag-schema";
 import ReadButton from "./reader";
 import type { Metadata } from 'next';
 

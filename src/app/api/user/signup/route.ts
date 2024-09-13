@@ -14,7 +14,7 @@ const config = {
 };
 
 // JWT Secret from environment variables
-const AUTH_SECRET = process.env.AUTH_SECRET || 'your-default-secret';
+const AUTH_SECRET = process.env.AUTH_SECRET || 'dillermand';
 
 // Helper function to create request structure for MongoDB
 const createRequestData = (requestData?: any) => {

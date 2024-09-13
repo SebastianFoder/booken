@@ -18,9 +18,9 @@ async function login(username: string, password: string, router: AppRouterInstan
         mutate(`${process.env.NEXT_PUBLIC_URL}/api/user`);
 
         const referrer = document.referrer;
-        const isFromOrd = referrer.includes(process.env.NEXT_PUBLIC_URL || '');
+        const isFromSite = referrer.includes(process.env.NEXT_PUBLIC_URL || '');
 
-        if (isFromOrd) {
+        if (isFromSite && !referrer.includes('/signout')) {
             router.back();
         } else {
             // Fall back to / if not from the expected route
