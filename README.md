@@ -39,7 +39,7 @@ Ensure you have the following installed:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/sebastian-foder/booken.git
+git clone https://github.com/SebastianFoder/booken.git
 cd booken
 ```
 
