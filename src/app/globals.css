@@ -12,13 +12,7 @@
 
 
 .background{
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
   filter: blur(0.15rem);
-  z-index: -1;
-  
 }
 
 body {
