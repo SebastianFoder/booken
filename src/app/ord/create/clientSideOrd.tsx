@@ -1,18 +1,24 @@
-import { ObjectId } from "mongodb";
-import { IOrdFinal } from "../api/ord/ord-schema";
+"use client";
+
+import { IOrdFinal } from "@/app/api/ord/ord-schema";
 import axios from "axios";
+import OrdForm from "../ordform";
 
 export async function submitOrd(finalOrd: IOrdFinal): Promise<boolean> {
-    "use server";
     try {
+
+        const token = localStorage.getItem('token');
+        if (!token) throw new Error('No auth token found');
+
         // Map the tags to only include their IDs
         const ordData = {
             ...finalOrd,
-            tags: finalOrd.tags.map(tag => new ObjectId(tag._id)),
+            tags: finalOrd.tags,
         };
 
         const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/ord`, ordData, {
             headers: {
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
         });
@@ -20,11 +26,15 @@ export async function submitOrd(finalOrd: IOrdFinal): Promise<boolean> {
         if (response.status === 200 || response.status === 201) {
             return true;
         } else {
-            console.error('Failed to create ord:', response);
             return false;
         }
     } catch (error) {
-        console.error('Error creating ord:', error);
         return false;
     }
+}
+
+
+export default function ClientSideOrd(){
+    return <OrdForm submit={submitOrd} />
+
 }

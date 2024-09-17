@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import { IOrd, IOrdFinal, OrdSchema } from "../ord-schema";
+import HasAuth from "@/app/lib/hasAuth";
 
 // Base configuration
 const config = {
@@ -102,6 +103,11 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
 // PATCH: Update a specific Ord by ID
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }): Promise<NextResponse<OrdSchema | { error: string }>> {
+    const auth = HasAuth(req, 1);
+    if (!auth.hasAuth) {
+        return NextResponse.json({ error: "Unauthorized", success: false }, { status: 401 });
+    }
+    
     const { id } = params;
 
     if (!id) {
@@ -155,6 +161,11 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
 // DELETE: Remove a specific Ord by ID
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }): Promise<NextResponse<{ message: string } | { error: string }>> {
+    const auth = HasAuth(req, 1);
+    if (!auth.hasAuth) {
+        return NextResponse.json({ error: "Unauthorized", success: false }, { status: 401 });
+    }
+    
     const { id } = params;
 
     if (!id) {

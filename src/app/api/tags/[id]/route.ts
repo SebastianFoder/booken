@@ -1,6 +1,7 @@
 import axios from "axios";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { ITag, TagSchema } from "../tag-schema";
+import HasAuth from "@/app/lib/hasAuth";
 
 const apiKey = process.env.DB_API_KEY;
 const endPoint = process.env.DB_END_POINT;
@@ -47,7 +48,12 @@ export async function GET(req: Request, { params }: { params: { id: string } }):
 }
 
 // PATCH
-export async function PATCH(req: Request, { params }: { params: { id: string } }): Promise<NextResponse<TagSchema | { error: string }>> {
+export async function PATCH(req: NextRequest, { params }: { params: { id: string } }): Promise<NextResponse<TagSchema | { error: string }>> {
+  const auth = HasAuth(req, 1);
+  if (!auth.hasAuth) {
+      return NextResponse.json({ error: "Unauthorized", success: false }, { status: 401 });
+  }
+  
   const { id } = params;
 
   if (!id) {
@@ -108,6 +114,11 @@ export async function DELETE(
   req: Request,
   { params }: { params: { id: string } }
 ): Promise<NextResponse<{ success: boolean } | { error: string }>> {
+  
+  const auth = HasAuth(req, 1);
+  if (!auth.hasAuth) {
+      return NextResponse.json({ error: "Unauthorized", success: false }, { status: 401 });
+  }
   const { id } = params;
 
   if (!id) {

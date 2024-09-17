@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import { IOrd, IOrdFinal, OrdSchema } from "./ord-schema";
+import HasAuth from "@/app/lib/hasAuth";
 
 // Base configuration
 const config = {
@@ -133,8 +134,12 @@ export async function GET(req: NextRequest): Promise<NextResponse<{ ord: IOrdFin
 }
 
 // POST (create) a new Ord
-export async function POST(req: NextRequest): Promise<NextResponse<OrdSchema | null>> {
+export async function POST(req: NextRequest) {
     try {
+        const auth = HasAuth(req, 1);
+        if (!auth.hasAuth) {
+            return NextResponse.json({ error: "Unauthorized", success: false }, { status: 401 });
+        }
         const body = await req.json();
         const newOrd: IOrd = body;
 

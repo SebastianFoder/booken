@@ -1,6 +1,6 @@
-import OrdForm from "../ordform";
-import { submitOrd } from "../submit-ord";
-import type { Metadata } from 'next';
+import AuthPageGateway from "@/app/lib/authPageGateway";
+import ClientSideOrd from "./clientSideOrd";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: 'Booken | Create Ord',
@@ -11,17 +11,20 @@ export const metadata: Metadata = {
     },
 };
 
+
 export default function CreateOrd(){
     return(
-        <main>
-            <section>
-                <article>
-                    <h1>Opret Ord</h1>
-                </article>
-                <article>
-                    <OrdForm submit={submitOrd} />
-                </article>
-            </section>
-        </main>
+        <AuthPageGateway authLevel={1}>
+            <main>
+                <section>
+                    <article>
+                        <h1>Opret Ord</h1>
+                    </article>
+                    <article>
+                        <ClientSideOrd />
+                    </article>
+                </section>
+            </main>
+        </AuthPageGateway>
     )
 }

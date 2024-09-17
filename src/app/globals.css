@@ -97,7 +97,16 @@ ul.pages a{
   font-weight: 500;
 }
 
-ul.pages a>*{
+nav li.user>h3{
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: hsl(var(--secondary));
+  font-weight: 500;
+}
+
+ul.pages a>*, nav li.user>h3{
   transform: scale(1);
   transition: transform 0.25s cubic-bezier(.85,.75,.21,2.5);
 }
@@ -106,8 +115,15 @@ ul.pages a.active>*{
   transform: scale(1.05);
 }
 
-ul.pages a:hover>*{
+ul.pages a:hover>*, nav li.user:hover>h3{
   transform: scale(1.1);
+}
+
+nav li.user{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 1.5rem;
 }
 
 main{
@@ -220,7 +236,6 @@ table tbody{
 table thead th{
   font-size: 1.375rem;
   font-weight: 600;
-  padding-inline: 1rem;
   color: hsl(var(--white));
 }
 
@@ -320,15 +335,6 @@ form .form-group:has(.btn){
 form .btn{
   width: 6.5rem;
   height: 2.5rem;
-}
-
-form .form-group input[type="text"]{
-  font-family: 'Poppins', sans-serif;
-  width: 20ch;
-  border-radius: 1ch;
-  border: 2px solid hsl(var(--black));
-  padding-inline: 0.5rem;
-  height: 1.5rem;
 }
 
 form .form-group input[type="color"]{
@@ -538,12 +544,13 @@ form.ord-form .container{
   gap: 1rem;
 }
 
-form.ord-form input[type="text"]{
+form.ord-form input[type="text"], form.ord-form input[type="password"], form.ord-form textarea{
   width: min(50ch, 100%);
   border: 1px solid hsl(var(--white));
 }
 
-input[type="text"]{
+input[type="text"], input[type="password"]{
+  font-family: 'Poppins', sans-serif;
   padding-inline: 0.5rem;
   background-color: transparent;
   color: hsl(var(--white));
@@ -553,14 +560,47 @@ input[type="text"]{
   font-size: 1.25rem;
 }
 
-input[type="text"]::placeholder, input[type="text"]::-webkit-input-placeholder{
+input[type="text"]::placeholder, input[type="text"]::-webkit-input-placeholder, input[type="password"]::placeholder, input[type="password"]::-webkit-input-placeholder{
   color: hsl(var(--white));
   opacity: 1;
 }
 
-table.ord-table tr {
-  grid-template-columns: 1fr 15rem 1fr;
+table tr{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
 }
+
+
+table tr>*{
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: initial;
+}
+
+table.ord-table tr>*:nth-of-type(2){
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 20rem;
+}
+
+table tr>*:nth-of-type(3){
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 10rem;
+}
+
+table tr>*:nth-of-type(2){
+  width: 10rem;
+  flex-grow: 0;
+}
+
+.tag-table tr>*:nth-of-type(1){
+  flex-shrink: 0;
+  padding-right: 1.5rem;
+}
+
 
 table.ord-table td{
   align-items: start;
@@ -641,5 +681,11 @@ div.ord-tags{
   top: 1rem;
   right: 1.5rem;
   display: flex;
+  gap: 1rem;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./header";
 import Background from "@/components/background";
+import AuthProvider from "./lib/authProvider";
 
 export const metadata: Metadata = {
   title: 'Booken',
@@ -66,9 +67,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
-        <Background />
+        <AuthProvider>
+          <Header />
+          {children}
+          <Background />
+        </AuthProvider>        
       </body>
     </html>
   );

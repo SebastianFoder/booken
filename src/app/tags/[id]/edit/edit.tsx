@@ -7,7 +7,16 @@ import { TagSchema } from "@/app/api/tags/tag-schema";
 
 async function EditTagSubmit(tag: TagSchema) : Promise<boolean>{
     if(tag.tag.length > 0){
-        const response = await axios.patch(`${process.env.NEXT_PUBLIC_URL}/api/tags/${tag._id}`, tag);
+
+        const token = localStorage.getItem('token');
+        if (!token) throw new Error('No auth token found');
+
+        const response = await axios.patch(`${process.env.NEXT_PUBLIC_URL}/api/tags/${tag._id}`, tag,{
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
         return response.status === 200 || response.status === 201;
     }
     return false;    
