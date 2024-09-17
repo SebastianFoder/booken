@@ -3,7 +3,6 @@
 import { TagSchema } from "@/app/api/tags/tag-schema";
 import TagForm from "../tagForm";
 import axios from "axios";
-import AuthPageGateway from "@/app/lib/authPageGateway";
 
 async function AddTag(tag: TagSchema) : Promise<boolean>{
     if(tag.tag.length > 0){
@@ -25,16 +24,13 @@ async function AddTag(tag: TagSchema) : Promise<boolean>{
 
 export default function ClientSideTag(){
     return(
-        <AuthPageGateway authLevel={1}>
-            <main>
-                <section>
-                    <article>
-                        <h1>Opret Tag</h1>
-                        <TagForm submit={AddTag}/>
-
-                    </article>
-                </section>
-            </main>     
-        </AuthPageGateway>   
+        <main>
+            <section>
+                <article>
+                    <h1>Opret Tag</h1>
+                    <TagForm submit={AddTag}/>
+                </article>
+            </section>
+        </main>      
     )
 }

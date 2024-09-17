@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ClientSideTag from './clientSideTag';
+import AuthPageGateway from '@/app/lib/authPageGateway';
 
 export const metadata: Metadata = {
     title: 'Booken | Create Tag',
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
 
 export default function CreateTag(){ 
     return(
-        <ClientSideTag />
+        <AuthPageGateway authLevel={1}>
+            <ClientSideTag />
+        </AuthPageGateway>
     )
 }
