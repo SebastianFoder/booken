@@ -214,35 +214,39 @@ export default function OrdTable({ page, limit, ordSearch: initialOrdSearch, sel
                     ))}
                 </tbody>
             </table>
-            <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
-                <label htmlFor="limit-select" style={{ marginRight: '10px' }}>Items per page:</label>
-                <select
-                    id="limit-select"
-                    value={limit}
-                    onChange={handleLimitChange}
-                    style={{ marginRight: '20px' }}
-                >
-                    {[10, 25, 50, 100].map(limitOption => (
-                        <option key={limitOption} value={limitOption}>
-                            {limitOption}
-                        </option>
-                    ))}
-                </select>
-                <button
-                    onClick={() => handlePageChange(page - 1)}
-                    disabled={page <= 1}
-                    style={{ marginRight: '10px' }}
-                >
-                    Previous
-                </button>
-                <span>Page {page} of {data?.totalPages || 1}</span>
-                <button
-                    onClick={() => handlePageChange(page + 1)}
-                    disabled={page >= (data?.totalPages || 1)}
-                    style={{ marginLeft: '10px' }}
-                >
-                    Next
-                </button>
+            <div className="page-control">
+                <div className="items">
+                    <label htmlFor="limit-select" style={{ marginRight: '10px' }}>Items per page:</label>
+                    <select
+                        id="limit-select"
+                        value={limit}
+                        onChange={handleLimitChange}
+                    >
+                        {[10, 25, 50, 100].map(limitOption => (
+                            <option key={limitOption} value={limitOption}>
+                                {limitOption}
+                            </option>
+                        ))}
+                    </select>                    
+                </div>
+                <div className="page-navigation">
+                    <button
+                        onClick={() => handlePageChange(page - 1)}
+                        disabled={page <= 1}
+                        style={{ marginRight: '10px' }}
+                    >
+                        Previous
+                    </button>
+                    <span>Page {page} of {data?.totalPages || 1}</span>
+                    <button
+                        onClick={() => handlePageChange(page + 1)}
+                        disabled={page >= (data?.totalPages || 1)}
+                        style={{ marginLeft: '10px' }}
+                    >
+                        Next
+                    </button>
+                </div>
+                
             </div>
             {showModal && (
                 <div className="modal-overlay">

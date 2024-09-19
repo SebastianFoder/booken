@@ -16,7 +16,6 @@ export default function HeaderUser(){
         
     )
 
-
     return(
         <span className="btn btn-red">
             <NavLink href="/auth/signout">

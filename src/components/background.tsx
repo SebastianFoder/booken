@@ -89,7 +89,9 @@ export default function Background() {
         const offsetX = -Math.abs(Math.floor(Math.random() * (window.innerWidth * 1.45 - window.innerWidth) + 10));
 		const offsetY = -Math.abs(Math.floor(Math.random() * (window.innerHeight * 1.45 - window.innerHeight) + 10));
 
-		if (!loaded) {
+        const hasMouse = window.matchMedia('(pointer: fine)').matches;
+
+		if (hasMouse && !loaded) {
 			window.addEventListener('mousemove', (e) => handleMouseMove(e, setDimensions, dimensionsRef));
 			window.addEventListener('resize', () => updateDimensions(setDimensions));
 		}
